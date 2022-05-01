@@ -12,6 +12,8 @@ pushd ./linux-home-config
 ./setup.sh
 popd
 
+echo "LS_COLORS=\$LS_COLORS:'ow=1;34:' ; export LS_COLORS" >> ~/.zshrc
+
 sudo zypper install --no-recommends zsh youtube-dl
 
 chsh -s /bin/zsh
