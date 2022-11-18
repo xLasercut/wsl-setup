@@ -13,7 +13,3 @@ source linux_setup.sh
 linux_setup setup base
 linux_setup executables
 popd
-
-sudo sudo apt-get install zsh
-
-chsh -s /bin/zsh
