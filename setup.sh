@@ -6,7 +6,7 @@ git submodule update --recursive --remote
 
 # update system
 sudo apt-get update
-sudo sudo apt-get install zsh libxss1 libfuse2 software-properties-common unzip
+sudo sudo apt-get install zsh libxss1 libfuse2 software-properties-common unzip libasound2 libsecret-1-0 gnome-keyring
 sudo add-apt-repository ppa:appimagelauncher-team/stable
 sudo apt-get update
 sudo apt-get install appimagelauncher
