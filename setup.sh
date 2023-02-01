@@ -18,4 +18,5 @@ linux_setup executables
 popd
 
 echo $'export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk \'{print $2; exit;}\'):0.0' >> ~/.zshrc
+echo 'export LIBGL_ALWAYS_INDIRECT=1' >> ~/.zshrc
 echo 'export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"' >> ~/.zshrc
