@@ -11,5 +11,5 @@ sudo sudo apt-get install zsh
 pushd ./linux-home-config
 source linux_setup.sh
 linux_setup setup base
-linux_setup aws
+linux_setup executables
 popd
