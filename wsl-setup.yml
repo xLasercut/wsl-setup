@@ -12,6 +12,7 @@
       prompt: Enter git email
       private: false
   roles:
+    - software
     - zsh
     - git
     - docker
