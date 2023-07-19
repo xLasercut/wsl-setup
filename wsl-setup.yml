@@ -1,11 +1,9 @@
-- hosts: wsl
-  name: Setup wsl
-  connection: ssh
+- name: Setup wsl
+  hosts: wsl
+  connection: local
   vars:
     user_file_perm: "644"
     user_dir_perm: "755"
-  vars_files:
-    - vars.yml
   vars_prompt:
     - name: git_user
       prompt: Enter git username
@@ -13,9 +11,13 @@
     - name: git_email
       prompt: Enter git email
       private: false
+    - name: wsl_default_user
+      prompt: WSL default user login
+      private: false
   roles:
     - zsh
     - git
     - docker
     - ssh
     - aws
+    - wsl_config
