@@ -1,0 +1,52 @@
+- name: Install zsh
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - zsh
+      - git
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - curl
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
+  become: true
+
+- name: Install antigen
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/antigen.git
+    dest: ~/antigen
+    version: master
+
+- name: Copy zshrc
+  ansible.builtin.copy:
+    src: files/.zshrc
+    dest: ~/.zshrc
+    force: false
+    mode: "{{ user_file_perm }}"
+
+- name: Copy p10k config
+  ansible.builtin.copy:
+    src: files/.p10k.zsh
+    dest: ~/.p10k.zsh
+    force: false
+    mode: "{{ user_file_perm }}"
+
+- name: Set login shell to `/bin/zsh` with `usermod` for user {{ ansible_user }}
+  ansible.builtin.command: usermod --shell /bin/zsh {{ ansible_user }}
+  changed_when: false
+  become: true
+
+- name: Initialise zsh plugins
+  ansible.builtin.shell: /bin/zsh ~/.zshrc
+  changed_when: false
+  tags:
+    - skip_ansible_lint

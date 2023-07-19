@@ -1,4 +1,11 @@
 .idea
 .vscode
 
+.venv
 .ssh
+
+# ansible
+hosts
+
+deployment_files/*
+!.gitkeep

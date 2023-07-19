@@ -1,0 +1,14 @@
+- name: Install assume-role
+  ansible.builtin.get_url:
+    url: https://github.com/xLasercut/aws-assume-role/releases/latest/download/assume-role-linux
+    dest: /usr/local/bin/__assume_role
+    mode: a+x
+  become: true
+
+- name: Copy aws config
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/.aws/
+    force: false
+    mode: "{{ user_file_perm }}"
+  with_fileglob: "files/.aws/*"

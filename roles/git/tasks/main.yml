@@ -1,0 +1,20 @@
+- name: Set git config
+  community.general.git_config:
+    name: "{{ item.key }}"
+    scope: global
+    value: "{{ item.value }}"
+  loop:
+    - { "key": "user.name", "value": "{{ git_user }}" }
+    - { "key": "user.email", "value": "{{ git_email }}" }
+    - { "key": "difftool.prompt", "value": "false" }
+    - { "key": "core.editor", "value": "vim" }
+    - { "key": "credential.helper", "value": "store" }
+
+- name: Copy git credentials
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/
+    force: false
+    mode: "{{ user_file_perm }}"
+  with_fileglob:
+    - "files/.git-credentials"

@@ -1,0 +1,58 @@
+- name: Get distribution
+  ansible.builtin.command: lsb_release -sc
+  register: distribution
+  changed_when: distribution.rc != 0
+
+- name: Get architecture
+  ansible.builtin.command: dpkg --print-architecture
+  register: architecture
+  changed_when: architecture.rc != 0
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+  become: true
+
+- name: Download gpg key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /usr/share/keyrings/docker.gpg_armored
+    checksum: sha256:1500c1f56fa9e26b9b8f42452a553675796ade0807cdce11975eb98170b3a570
+    mode: "{{ user_file_perm }}"
+  become: true
+
+- name: De-Armor gpg key
+  ansible.builtin.shell: gpg --dearmor < /usr/share/keyrings/docker.gpg_armored > /usr/share/keyrings/docker.gpg
+  args:
+    creates: /usr/share/keyrings/docker.gpg
+  become: true
+
+- name: Add repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ architecture.stdout }} signed-by=/usr/share/keyrings/docker.gpg] \
+    https://download.docker.com/linux/debian {{ distribution.stdout }} stable"
+    state: present
+  become: true
+
+- name: Install docker
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+  become: true
+
+- name: Start service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+  become: true

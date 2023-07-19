@@ -1,0 +1,21 @@
+- hosts: wsl
+  name: Setup wsl
+  connection: ssh
+  vars:
+    user_file_perm: "644"
+    user_dir_perm: "755"
+  vars_files:
+    - vars.yml
+  vars_prompt:
+    - name: git_user
+      prompt: Enter git username
+      private: false
+    - name: git_email
+      prompt: Enter git email
+      private: false
+  roles:
+    - zsh
+    - git
+    - docker
+    - ssh
+    - aws

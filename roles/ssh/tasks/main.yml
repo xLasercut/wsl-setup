@@ -1,0 +1,14 @@
+- name: Copy ssh files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/.ssh/
+    force: false
+    mode: "{{ user_file_perm }}"
+  with_fileglob: "files/.ssh/*"
+
+- name: Set correct ssh file permissions
+  ansible.builtin.shell: |
+    chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/*
+    chmod 644 ~/.ssh/*.pub || true
+  changed_when: false
