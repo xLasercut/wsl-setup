@@ -5,7 +5,6 @@
       - lsb-release
       - vim
       - flatpak
-      - distrobox
     state: present
   become: true
 
