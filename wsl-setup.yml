@@ -1,5 +1,5 @@
 - name: Setup wsl
-  hosts: localhost
+  hosts: wsl
   connection: local
   vars:
     user_file_perm: "644"
