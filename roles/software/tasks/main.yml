@@ -4,5 +4,16 @@
     name:
       - lsb-release
       - vim
+      - flatpak
+      - distrobox
     state: present
+  become: true
+
+- name: Install flatpaks
+  community.general.flatpak:
+    name:
+      - com.jetbrains.PyCharm-Professional
+      - com.jetbrains.WebStorm
+    state: present
+    method: system
   become: true
