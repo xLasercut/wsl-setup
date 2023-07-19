@@ -14,5 +14,6 @@ git clone https://github.com/zsh-users/antigen.git ~/antigen
 
 cp ./roles/zsh/files/.zshrc ~
 cp ./roles/zsh/files/.p10k.zsh ~
+sudo cp ./roles/wsl_config/files/wsl.conf /etc
 
 chsh -s /bin/zsh

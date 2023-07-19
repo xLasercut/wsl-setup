@@ -1,6 +1,7 @@
 - name: Create wsl conf
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: files/wsl.conf
     dest: /etc/wsl.conf
+    force: false
     mode: "{{ user_file_perm }}"
   become: true

@@ -11,9 +11,6 @@
     - name: git_email
       prompt: Enter git email
       private: false
-    - name: wsl_default_user
-      prompt: WSL default user login
-      private: false
   roles:
     - zsh
     - git
