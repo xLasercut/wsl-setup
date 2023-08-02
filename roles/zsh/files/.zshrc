@@ -16,6 +16,9 @@ antigen theme romkatv/powerlevel10k
 # env vars
 export NVM_AUTO_USE=true
 export PIPENV_VENV_IN_PROJECT=1
+export PATH=${PATH}:~/.local/bin
+export GOPATH=~/go
+export GPG_TTY=$TTY
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
