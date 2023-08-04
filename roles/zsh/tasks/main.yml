@@ -28,13 +28,13 @@
 
 - name: Copy zshrc
   ansible.builtin.get_url:
-    url: https://github.com/xLasercut/my-zsh/raw/master/.zshrc
+    url: https://raw.githubusercontent.com/xLasercut/my-zsh/master/.zshrc
     dest: ~/.zshrc
     mode: "{{ user_file_perm }}"
 
 - name: Copy p10k config
   ansible.builtin.get_url:
-    url: https://github.com/xLasercut/my-zsh/raw/master/.p10k.zsh
+    url: https://raw.githubusercontent.com/xLasercut/my-zsh/master/.p10k.zsh
     dest: ~/.p10k.zsh
     mode: "{{ user_file_perm }}"
 
