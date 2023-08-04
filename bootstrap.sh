@@ -12,8 +12,8 @@ sudo apt install zsh build-essential libssl-dev zlib1g-dev libbz2-dev libreadlin
 
 git clone https://github.com/zsh-users/antigen.git ~/antigen
 
-cp ./roles/zsh/files/.zshrc ~
-cp ./roles/zsh/files/.p10k.zsh ~
+curl -fLo "~/.zshrc" "https://github.com/xLasercut/my-zsh/raw/master/.zshrc"
+curl -fLo "~/.p10k.zsh" "https://github.com/xLasercut/my-zsh/raw/master/.p10k.zsh"
 sudo cp ./roles/wsl_config/files/wsl.conf /etc
 
 chsh -s /bin/zsh
