@@ -27,17 +27,15 @@
     version: master
 
 - name: Copy zshrc
-  ansible.builtin.copy:
-    src: files/.zshrc
+  ansible.builtin.get_url:
+    url: https://github.com/xLasercut/my-zsh/raw/master/.zshrc
     dest: ~/.zshrc
-    force: false
     mode: "{{ user_file_perm }}"
 
 - name: Copy p10k config
-  ansible.builtin.copy:
-    src: files/.p10k.zsh
+  ansible.builtin.get_url:
+    url: https://github.com/xLasercut/my-zsh/raw/master/.p10k.zsh
     dest: ~/.p10k.zsh
-    force: false
     mode: "{{ user_file_perm }}"
 
 - name: Set login shell to `/bin/zsh` with `usermod` for user {{ ansible_user }}
