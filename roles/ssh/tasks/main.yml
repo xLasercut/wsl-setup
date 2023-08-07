@@ -1,3 +1,17 @@
+- name: Ensure local bin folder
+  ansible.builtin.file:
+    path: ~/.local/bin/
+    state: directory
+    mode: "{{ user_dir_perm }}"
+
+- name: Install ssh agent relay requirements
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - socat
+    state: present
+  become: true
+
 - name: Copy ssh files
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -7,8 +21,37 @@
   with_fileglob: "files/.ssh/*"
 
 - name: Set correct ssh file permissions
-  ansible.builtin.shell: |
-    chmod 700 ~/.ssh
-    chmod 600 ~/.ssh/*
-    chmod 644 ~/.ssh/*.pub || true
+  ansible.builtin.shell:
+    cmd: |
+      chmod 700 ~/.ssh
+      chmod 600 ~/.ssh/*
+      chmod 644 ~/.ssh/*.pub || true
+    executable: /bin/bash
   changed_when: false
+
+- name: Create symlink to npiperelay binary
+  ansible.builtin.file:
+    src: "{{ npiperelay_path }}"
+    dest: ~/.local/bin/npiperelay.exe
+    state: link
+
+- name: Copy wsl ssh agent relay
+  ansible.builtin.copy:
+    src: binaries/wsl-ssh-agent-relay
+    dest: ~/.local/bin/wsl-ssh-agent-relay
+    mode: a+x
+
+- name: Ensure wsl-ssh-agent-relay binary line not exists
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    regex: "wsl-ssh-agent-relay start"
+    state: absent
+
+- name: Update zshrc
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    regex: "^(#)?{{ item.key }}"
+    line: "wsl-ssh-agent-relay start\n{{ item.key }}={{ item.value }}"
+    state: present
+  loop:
+    - { key: "export SSH_AUTH_SOCK", value: "${HOME}/.ssh/wsl-ssh-agent.sock" }

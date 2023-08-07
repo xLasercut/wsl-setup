@@ -5,3 +5,19 @@
     force: false
     mode: "{{ user_file_perm }}"
   become: true
+
+- name: Ensure binfmt.d folder
+  ansible.builtin.file:
+    path: /etc/lib/binfmt.d/
+    state: directory
+    mode: "{{ user_dir_perm }}"
+  become: true
+
+- name: Systemd fix
+  ansible.builtin.copy:
+    src: files/WSLInterop.conf
+    dest: /etc/lib/binfmt.d/WSLInterop.conf
+    force: false
+    mode: "{{ user_file_perm }}"
+  become: true
+

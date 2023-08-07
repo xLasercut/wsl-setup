@@ -10,6 +10,9 @@
     - name: git_email
       prompt: Enter git email
       private: false
+    - name: npiperelay_path
+      prompt: npiperelay executable path
+      private: false
   roles:
     - software
     - zsh
