@@ -44,7 +44,7 @@
   become: true
 
 - name: Initialise zsh plugins
-  ansible.builtin.shell: /bin/zsh ~/.zshrc
+  ansible.builtin.shell:
+    cmd: /bin/zsh ~/.zshrc
+    executable: /bin/bash
   changed_when: false
-  tags:
-    - skip_ansible_lint

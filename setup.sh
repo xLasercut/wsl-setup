@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook wsl-setup.yml -Kvk
+ansible-playbook wsl-setup.yml -v

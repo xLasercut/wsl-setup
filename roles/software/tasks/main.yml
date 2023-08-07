@@ -2,25 +2,6 @@
   ansible.builtin.apt:
     update_cache: true
     name:
-      - lsb-release
       - vim
-      - flatpak
     state: present
-  become: true
-
-- name: Add flathub remote
-  community.general.flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: system
-  become: true
-
-- name: Install flatpaks
-  community.general.flatpak:
-    name:
-      - com.jetbrains.PyCharm-Professional
-      - com.jetbrains.WebStorm
-    state: present
-    method: system
   become: true
