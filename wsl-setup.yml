@@ -10,15 +10,11 @@
     - name: git_email
       prompt: Enter git email
       private: false
-    - name: wsl_version
-      prompt: Enter WSL version
-      private: false
   roles:
     - software
     - zsh
     - git
-    - role: docker
-      when: wsl_version == "2"
+    - docker
     - ssh
     - aws
     - wsl_config
