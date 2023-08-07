@@ -3,5 +3,7 @@
     update_cache: true
     name:
       - vim
+      - sshpass
+      - rsync
     state: present
   become: true
