@@ -1,13 +1,3 @@
-- name: Get distribution
-  ansible.builtin.command: lsb_release -sc
-  register: distribution
-  changed_when: distribution.rc != 0
-
-- name: Get architecture
-  ansible.builtin.command: dpkg --print-architecture
-  register: architecture
-  changed_when: architecture.rc != 0
-
 - name: Install dependencies
   ansible.builtin.apt:
     update_cache: true
@@ -17,6 +7,16 @@
       - gnupg
       - lsb-release
   become: true
+
+- name: Get distribution
+  ansible.builtin.command: lsb_release -sc
+  register: distribution
+  changed_when: distribution.rc != 0
+
+- name: Get architecture
+  ansible.builtin.command: dpkg --print-architecture
+  register: architecture
+  changed_when: architecture.rc != 0
 
 - name: Download gpg key
   ansible.builtin.get_url:
