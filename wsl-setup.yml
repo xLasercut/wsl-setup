@@ -17,7 +17,13 @@
     - software
     - zsh
     - git
-    - docker
-    - ssh
-    - aws
-    - wsl_config
+    # - docker
+    # - ssh
+    # - aws
+    # - wsl_config
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+- name: Install appimage dependencies
+  community.general.zypper:
+    update_cache: true
+    name:
+      - tar
+      - libfuse2
+      - fontconfig
+      - libgtk-3-0
+      - Mesa
+      - libXi6
+      - libXrender1
+      - libXtst6
+      - fuse
+    state: present
+  become: true
+
