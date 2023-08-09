@@ -4,8 +4,14 @@
     state: directory
     mode: "{{ user_dir_perm }}"
 
+- name: Ensure .ssh folder
+  ansible.builtin.file:
+    path: ~/.ssh/
+    state: directory
+    mode: "700"
+
 - name: Install ssh agent relay requirements
-  ansible.builtin.apt:
+  community.general.zypper:
     update_cache: true
     name:
       - socat
@@ -44,14 +50,14 @@
 - name: Ensure wsl-ssh-agent-relay binary line not exists
   ansible.builtin.lineinfile:
     path: ~/.zshrc
-    regex: "wsl-ssh-agent-relay start"
+    regex: "wsl-ssh-agent-relay"
     state: absent
 
 - name: Update zshrc
   ansible.builtin.lineinfile:
     path: ~/.zshrc
     regex: "^(#)?{{ item.key }}"
-    line: "wsl-ssh-agent-relay start\n{{ item.key }}={{ item.value }}"
+    line: "{{ item.key }}={{ item.value }}\nwsl-ssh-agent-relay"
     state: present
   loop:
     - { key: "export SSH_AUTH_SOCK", value: "${HOME}/.ssh/wsl-ssh-agent.sock" }
