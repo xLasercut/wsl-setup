@@ -17,7 +17,7 @@
   become: true
 
 - name: Start service
-  ansible.builtin.service:
+  ansible.builtin.systemd_service:
     name: docker
     state: started
     enabled: true
