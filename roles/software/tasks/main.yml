@@ -5,7 +5,7 @@
       - vim
       - sshpass
       - rsync
-      - flatpak
+      - youtube-dl
     state: present
   become: true
 
@@ -18,25 +18,4 @@
       - wsl_gui
     state: present
     type: pattern
-  become: true
-
-- name: Register flathub
-  community.general.flatpak_remote:
-    name: flathub
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: system
-    state: present
-  become: true
-
-
-- name: Install flatpaks
-  community.general.flatpak:
-    name:
-      - com.getpostman.Postman
-      - com.github.tchx84.Flatseal
-      - com.jetbrains.WebStorm
-      - com.jetbrains.PyCharm-Professional
-    remote: flathub
-    state: present
-    method: system
   become: true
