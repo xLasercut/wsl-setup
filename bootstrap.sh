@@ -7,8 +7,8 @@ if [[ ${current_user} == "root" ]]; then
   exit 1
 fi
 
-sudo apt update
-sudo apt install zsh build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git
+sudo zypper ref
+sudo zypper install zsh git gcc automake bzip2 libbz2-devel xz xz-devel openssl-devel ncurses-devel readline-devel zlib-devel tk-devel libffi-devel sqlite3-devel gdbm-devel make findutils patch
 
 git clone https://github.com/zsh-users/antigen.git ~/antigen
 
