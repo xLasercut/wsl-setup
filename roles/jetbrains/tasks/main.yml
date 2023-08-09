@@ -11,6 +11,6 @@
       - libXrender1
       - libXtst6
       - fuse
+      - libgthread-2_0-0
     state: present
   become: true
-

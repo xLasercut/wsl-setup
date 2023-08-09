@@ -9,6 +9,7 @@ fi
 
 sudo zypper ref
 sudo zypper install zsh git gcc automake bzip2 libbz2-devel xz xz-devel openssl-devel ncurses-devel readline-devel zlib-devel tk-devel libffi-devel sqlite3-devel gdbm-devel make findutils patch
+sudo zypper install -t pattern wsl_base wsl_systemd wsl_gui
 
 git clone https://github.com/zsh-users/antigen.git ~/antigen
 
