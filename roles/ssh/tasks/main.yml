@@ -5,7 +5,7 @@
     mode: "{{ user_dir_perm }}"
 
 - name: Install ssh agent relay requirements
-  ansible.builtin.apt:
+  community.general.zypper:
     update_cache: true
     name:
       - socat

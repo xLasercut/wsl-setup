@@ -18,13 +18,7 @@
     - zsh
     - git
     - jetbrains
-    # - docker
-    # - ssh
-    # - aws
-    # - wsl_config
-
-
-
-
-
-
+    - docker
+    - ssh
+    - aws
+    - wsl_config
