@@ -18,3 +18,5 @@ curl "https://raw.githubusercontent.com/xLasercut/my-zsh/master/.p10k.zsh" --out
 sudo cp ./roles/wsl_config/files/wsl.conf /etc
 
 chsh -s /bin/zsh
+
+/bin/zsh ~/.zshrc
