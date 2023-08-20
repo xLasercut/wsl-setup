@@ -10,14 +10,6 @@
     state: directory
     mode: "700"
 
-- name: Install ssh agent relay requirements
-  community.general.zypper:
-    update_cache: true
-    name:
-      - socat
-    state: present
-  become: true
-
 - name: Copy ssh files
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -35,29 +27,11 @@
     executable: /bin/bash
   changed_when: false
 
-- name: Create symlink to npiperelay binary
-  ansible.builtin.file:
-    src: "{{ npiperelay_path }}"
-    dest: ~/.local/bin/npiperelay.exe
-    state: link
-
-- name: Copy wsl ssh agent relay
-  ansible.builtin.copy:
-    src: binaries/wsl-ssh-agent-relay
-    dest: ~/.local/bin/wsl-ssh-agent-relay
-    mode: a+x
-
-- name: Ensure wsl-ssh-agent-relay binary line not exists
-  ansible.builtin.lineinfile:
-    path: ~/.zshrc
-    regex: "wsl-ssh-agent-relay"
-    state: absent
-
 - name: Update zshrc
   ansible.builtin.lineinfile:
     path: ~/.zshrc
     regex: "^(#)?{{ item.key }}"
-    line: "{{ item.key }}={{ item.value }}\nwsl-ssh-agent-relay"
+    line: "{{ item.key }}={{ item.value }}"
     state: present
   loop:
-    - { key: "export SSH_AUTH_SOCK", value: "${HOME}/.ssh/wsl-ssh-agent.sock" }
+    - { key: "export SSH_AUTH_SOCK", value: "/mnt/d/Programs/ssh-agent/ssh-agent.sock" }

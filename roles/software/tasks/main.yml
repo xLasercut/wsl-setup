@@ -14,8 +14,6 @@
     update_cache: true
     name:
       - wsl_base
-      # - wsl_systemd
-      # - wsl_gui
     state: present
     type: pattern
   become: true
