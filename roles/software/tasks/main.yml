@@ -1,19 +1,9 @@
 - name: Install common used software
-  community.general.zypper:
+  ansible.builtin.apt:
     update_cache: true
     name:
       - vim
       - sshpass
       - rsync
-      - youtube-dl
     state: present
-  become: true
-
-- name: Install wsl patterns
-  community.general.zypper:
-    update_cache: true
-    name:
-      - wsl_base
-    state: present
-    type: pattern
   become: true

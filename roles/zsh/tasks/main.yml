@@ -1,26 +1,23 @@
 - name: Install zsh
-  community.general.zypper:
+  ansible.builtin.apt:
     update_cache: true
     name:
       - zsh
       - git
-      - gcc
-      - automake
-      - bzip2
-      - libbz2-devel
-      - xz
-      - xz-devel
-      - openssl-devel
-      - ncurses-devel
-      - readline-devel
-      - zlib-devel
-      - tk-devel
-      - libffi-devel
-      - sqlite3-devel
-      - gdbm-devel
-      - make
-      - findutils
-      - patch
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - curl
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
   become: true
 
 - name: Install antigen
