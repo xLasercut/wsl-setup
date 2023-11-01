@@ -7,3 +7,10 @@
       - rsync
     state: present
   become: true
+
+- name: Install youtube-dl
+  ansible.builtin.get_url:
+    url: https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux
+    dest: /usr/local/bin/youtube-dl
+    mode: a+x
+  become: true
